@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  .title {
+    font-size: 1em;
+  }
+  #tablero {
+    display: grid;
+    gap: 2px;
+    margin: 20px auto;
+  }
+  .celda {
+    width: 30px;
+    height: 30px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 1px solid #aaa;
+    cursor: pointer;
+  }
+  .revelada {
+    background-color: white !important;
+  }
+  .bandera {
+    background-color: black !important;
+  }
