@@ -3,6 +3,7 @@ package com.juaachuc.todo_list.controller;
 import com.juaachuc.todo_list.model.Usuario;
 import com.juaachuc.todo_list.service.JwtService;
 import com.juaachuc.todo_list.service.UsuarioService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -45,4 +47,18 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Error al registrar usuario"));
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7);
+        jwtService.invalidateToken(token);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Sesión cerrada correctamente.");
+
+        return ResponseEntity.ok(response);
+    }
+
+
+
 }
